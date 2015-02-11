@@ -1,0 +1,43 @@
+<html>
+	<head>
+	    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<link href="{{ url_for('static', filename = 'bootstrap3-editable/css/bootstrap-editable.css') }}" rel="stylesheet">
+		<script src="{{ url_for('static', filename = 'bootstrap3-editable/js/bootstrap-editable.js') }}"></script>
+	</head>
+	<body>
+		<div>
+			<table>
+				<tr>
+					<th>id</th>
+					<th>field1</th>
+					<th>field2</th>
+					<th>field3</th>
+				</tr>
+				{% for key, line in result.iteritems() %}
+					<tr>
+						<td>{{ key }}</td>
+						<td>
+							<a href="#" class="editable" id="field1-{{ key }}" data-type="text" data-pk="{{key}}" data-url="/post" data-title="Enter value for field1">{{ line.field1 }}</a>
+						</td>
+						<td>
+							<a href="#" class="editable" id="field2-{{ key }}" data-type="text" data-pk="{{key}}" data-url="/post" data-title="Enter value for field2">{{ line.field2 }}</a>
+						</td>
+						<td>
+							<a href="#" class="editable" id="field3-{{ key }}" data-type="text" data-pk="{{key}}" data-url="/post" data-title="Enter value for field3">{{ line.field3 }}</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+			<a href="#" id="username" data-type="text" data-pk="1" data-url="/post" data-title="Enter username">superuser</a>
+		</div>
+		<script type="text/javascript">
+		$(document).ready(function() {
+				$.fn.editable.defaults.mode = 'inline';
+				$('#username').editable();
+				$('a.editable').editable();
+		});
+		</script>
+	</body>
+</html>
